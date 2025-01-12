@@ -1,9 +1,8 @@
-package com.example.order_management;
+package com.biyun.order;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.biyun.order.starter"})
 public class OrderManagementApplication {
 
 	public static void main(String[] args) {
