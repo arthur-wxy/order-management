@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.biyun.order.mapper.OrdersMapper">
+  <resultMap id="BaseResultMap" type="com.biyun.order.model.Orders">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="is_deleted" jdbcType="CHAR" property="isDeleted" />
+    <result column="actual_customer" jdbcType="VARCHAR" property="actualCustomer" />
+    <result column="customer_phone" jdbcType="VARCHAR" property="customerPhone" />
+    <result column="customer_email" jdbcType="VARCHAR" property="customerEmail" />
+    <result column="customer_zip" jdbcType="VARCHAR" property="customerZip" />
+    <result column="customer_company" jdbcType="VARCHAR" property="customerCompany" />
+    <result column="customer_payee" jdbcType="VARCHAR" property="customerPayee" />
+    <result column="customer_payee_account" jdbcType="VARCHAR" property="customerPayeeAccount" />
+    <result column="order_status" jdbcType="VARCHAR" property="orderStatus" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.biyun.order.model.Orders">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    <result column="ext" jdbcType="LONGVARCHAR" property="ext" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    id, gmt_create, gmt_modified, creator, modifier, is_deleted, actual_customer, customer_phone, 
+    customer_email, customer_zip, customer_company, customer_payee, customer_payee_account, 
+    order_status
+  </sql>
+  <sql id="Blob_Column_List">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    ext
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.biyun.order.model.OrdersExample" resultMap="ResultMapWithBLOBs">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.biyun.order.model.OrdersExample" resultMap="BaseResultMap">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from orders
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    delete from orders
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.biyun.order.model.OrdersExample">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    delete from orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.biyun.order.model.Orders" useGeneratedKeys="true">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    insert into orders (gmt_create, gmt_modified, creator, 
+      modifier, is_deleted, actual_customer, 
+      customer_phone, customer_email, customer_zip, 
+      customer_company, customer_payee, customer_payee_account, 
+      order_status, ext)
+    values (#{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, 
+      #{modifier,jdbcType=VARCHAR}, #{isDeleted,jdbcType=CHAR}, #{actualCustomer,jdbcType=VARCHAR}, 
+      #{customerPhone,jdbcType=VARCHAR}, #{customerEmail,jdbcType=VARCHAR}, #{customerZip,jdbcType=VARCHAR}, 
+      #{customerCompany,jdbcType=VARCHAR}, #{customerPayee,jdbcType=VARCHAR}, #{customerPayeeAccount,jdbcType=VARCHAR}, 
+      #{orderStatus,jdbcType=VARCHAR}, #{ext,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biyun.order.model.Orders" useGeneratedKeys="true">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="actualCustomer != null">
+        actual_customer,
+      </if>
+      <if test="customerPhone != null">
+        customer_phone,
+      </if>
+      <if test="customerEmail != null">
+        customer_email,
+      </if>
+      <if test="customerZip != null">
+        customer_zip,
+      </if>
+      <if test="customerCompany != null">
+        customer_company,
+      </if>
+      <if test="customerPayee != null">
+        customer_payee,
+      </if>
+      <if test="customerPayeeAccount != null">
+        customer_payee_account,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="ext != null">
+        ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="actualCustomer != null">
+        #{actualCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPhone != null">
+        #{customerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="customerEmail != null">
+        #{customerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="customerZip != null">
+        #{customerZip,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCompany != null">
+        #{customerCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPayee != null">
+        #{customerPayee,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPayeeAccount != null">
+        #{customerPayeeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="ext != null">
+        #{ext,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.biyun.order.model.OrdersExample" resultType="java.lang.Long">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    select count(*) from orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    update orders
+    <set>
+      <if test="row.id != null">
+        id = #{row.id,jdbcType=INTEGER},
+      </if>
+      <if test="row.gmtCreate != null">
+        gmt_create = #{row.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.gmtModified != null">
+        gmt_modified = #{row.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.creator != null">
+        creator = #{row.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="row.modifier != null">
+        modifier = #{row.modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="row.isDeleted != null">
+        is_deleted = #{row.isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="row.actualCustomer != null">
+        actual_customer = #{row.actualCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="row.customerPhone != null">
+        customer_phone = #{row.customerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="row.customerEmail != null">
+        customer_email = #{row.customerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="row.customerZip != null">
+        customer_zip = #{row.customerZip,jdbcType=VARCHAR},
+      </if>
+      <if test="row.customerCompany != null">
+        customer_company = #{row.customerCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="row.customerPayee != null">
+        customer_payee = #{row.customerPayee,jdbcType=VARCHAR},
+      </if>
+      <if test="row.customerPayeeAccount != null">
+        customer_payee_account = #{row.customerPayeeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="row.orderStatus != null">
+        order_status = #{row.orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="row.ext != null">
+        ext = #{row.ext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    update orders
+    set id = #{row.id,jdbcType=INTEGER},
+      gmt_create = #{row.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{row.gmtModified,jdbcType=TIMESTAMP},
+      creator = #{row.creator,jdbcType=VARCHAR},
+      modifier = #{row.modifier,jdbcType=VARCHAR},
+      is_deleted = #{row.isDeleted,jdbcType=CHAR},
+      actual_customer = #{row.actualCustomer,jdbcType=VARCHAR},
+      customer_phone = #{row.customerPhone,jdbcType=VARCHAR},
+      customer_email = #{row.customerEmail,jdbcType=VARCHAR},
+      customer_zip = #{row.customerZip,jdbcType=VARCHAR},
+      customer_company = #{row.customerCompany,jdbcType=VARCHAR},
+      customer_payee = #{row.customerPayee,jdbcType=VARCHAR},
+      customer_payee_account = #{row.customerPayeeAccount,jdbcType=VARCHAR},
+      order_status = #{row.orderStatus,jdbcType=VARCHAR},
+      ext = #{row.ext,jdbcType=LONGVARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    update orders
+    set id = #{row.id,jdbcType=INTEGER},
+      gmt_create = #{row.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{row.gmtModified,jdbcType=TIMESTAMP},
+      creator = #{row.creator,jdbcType=VARCHAR},
+      modifier = #{row.modifier,jdbcType=VARCHAR},
+      is_deleted = #{row.isDeleted,jdbcType=CHAR},
+      actual_customer = #{row.actualCustomer,jdbcType=VARCHAR},
+      customer_phone = #{row.customerPhone,jdbcType=VARCHAR},
+      customer_email = #{row.customerEmail,jdbcType=VARCHAR},
+      customer_zip = #{row.customerZip,jdbcType=VARCHAR},
+      customer_company = #{row.customerCompany,jdbcType=VARCHAR},
+      customer_payee = #{row.customerPayee,jdbcType=VARCHAR},
+      customer_payee_account = #{row.customerPayeeAccount,jdbcType=VARCHAR},
+      order_status = #{row.orderStatus,jdbcType=VARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.biyun.order.model.Orders">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    update orders
+    <set>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="actualCustomer != null">
+        actual_customer = #{actualCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPhone != null">
+        customer_phone = #{customerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="customerEmail != null">
+        customer_email = #{customerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="customerZip != null">
+        customer_zip = #{customerZip,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCompany != null">
+        customer_company = #{customerCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPayee != null">
+        customer_payee = #{customerPayee,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPayeeAccount != null">
+        customer_payee_account = #{customerPayeeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="ext != null">
+        ext = #{ext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.biyun.order.model.Orders">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    update orders
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=CHAR},
+      actual_customer = #{actualCustomer,jdbcType=VARCHAR},
+      customer_phone = #{customerPhone,jdbcType=VARCHAR},
+      customer_email = #{customerEmail,jdbcType=VARCHAR},
+      customer_zip = #{customerZip,jdbcType=VARCHAR},
+      customer_company = #{customerCompany,jdbcType=VARCHAR},
+      customer_payee = #{customerPayee,jdbcType=VARCHAR},
+      customer_payee_account = #{customerPayeeAccount,jdbcType=VARCHAR},
+      order_status = #{orderStatus,jdbcType=VARCHAR},
+      ext = #{ext,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.biyun.order.model.Orders">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    update orders
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=CHAR},
+      actual_customer = #{actualCustomer,jdbcType=VARCHAR},
+      customer_phone = #{customerPhone,jdbcType=VARCHAR},
+      customer_email = #{customerEmail,jdbcType=VARCHAR},
+      customer_zip = #{customerZip,jdbcType=VARCHAR},
+      customer_company = #{customerCompany,jdbcType=VARCHAR},
+      customer_payee = #{customerPayee,jdbcType=VARCHAR},
+      customer_payee_account = #{customerPayeeAccount,jdbcType=VARCHAR},
+      order_status = #{orderStatus,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByExampleWithLock" parameterType="com.biyun.order.model.OrdersExample" resultMap="BaseResultMap">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orders
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    for update
+  </select>
+  <select id="selectByPrimaryKeyWithLock" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from orders
+    where id = #{id,jdbcType=INTEGER}
+    for update
+  </select>
+</mapper>
