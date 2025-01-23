@@ -21,5 +21,4 @@ public class OrderManagementApplication {
 		}
 		SpringApplication.run(OrderManagementApplication.class, args);
 	}
-
 }
