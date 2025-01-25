@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { Button } from 'antd';
+import MyMenu from './components/nav/Menu';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       </header>
       <body>
         <Button type='primary'>测试antDesign</Button>
+        <MyMenu />
       </body>
     </div>
   );
