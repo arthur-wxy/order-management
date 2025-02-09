@@ -1,69 +1,36 @@
 [
     {
-      key: '1',
+      key: 'summary',
       icon: null,
-      label: 'Option 1',
+      label: '数据总览',
+      link:'/summary'
     },
     {
-      key: '2',
+      key: 'order_manage',
       icon: null,
-      label: 'Option 2',
-    },
-    {
-      key: '3',
-      icon: null,
-      label: 'Option 3',
-    },
-    {
-      key: 'sub1',
-      label: 'Navigation One',
-      icon: null,
+      label: '订单管理',
+      link:'/order_query',
       children: [
-        {
-          key: '5',
-          label: 'Option 5',
-        },
-        {
-          key: '6',
-          label: 'Option 6',
-        },
-        {
-          key: '7',
-          label: 'Option 7',
-        },
-        {
-          key: '8',
-          label: 'Option 8',
-        }
-      ]
+              {
+                key: '/order_query',
+                label: '订单查询',
+                link:'/order_query'
+              },
+              {
+                key: '/order_import',
+                label: '订单导入',
+                link:'/order_import'
+              }
+            ]
     },
     {
-      key: 'sub2',
-      label: 'Navigation Two',
+      key: 'bill_manage',
       icon: null,
-      children: [
-        {
-          key: '9',
-          label: 'Option 9',
-        },
-        {
-          key: '10',
-          label: 'Option 10',
-        },
-        {
-          key: 'sub3',
-          label: 'Submenu',
-          children: [
-            {
-              key: '11',
-              label: 'Option 11',
-            },
-            {
-              key: '12',
-              label: 'Option 12',
-            }
-          ]
-        }
-      ]
+      label: '账单管理',
+    },
+    {
+      key: 'logistics_manage',
+      label: '物流管理',
+      icon: null,
     }
   ]
