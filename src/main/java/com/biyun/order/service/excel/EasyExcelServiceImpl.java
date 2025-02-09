@@ -5,7 +5,6 @@ import com.biyun.order.service.excel.listener.BaseExcelListener;
 import com.biyun.order.service.excel.listener.ExcelParserFactory;
 import com.biyun.order.service.excel.pojo.BaseExcelPojo;
 
-import com.biyun.order.service.local.ConfigWatcherService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +23,7 @@ public class EasyExcelServiceImpl implements EasyExcelService {
         BaseExcelListener listener = ExcelParserFactory.getListener(type);
         if (listener == null) {
             logger.info("没有找到对应的解析器");
+            return null;
         }
         EasyExcel.read(file, listener.getClz(),listener).sheet().doRead();
         return listener.getDataList();

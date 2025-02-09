@@ -4,6 +4,10 @@ public class ApiResponse<T> {
     private boolean success;
     private T content;
 
+    private String errorMsg;
+
+    private String errorCode;
+
     public ApiResponse(){}
 
     public ApiResponse(boolean success, T content) {
@@ -25,5 +29,18 @@ public class ApiResponse<T> {
 
     public void setContent(T content) {
         this.content = content;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+    public String getErrorCode() {
+        return errorCode;
+    }
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
 }

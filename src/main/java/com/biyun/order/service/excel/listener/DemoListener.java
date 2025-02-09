@@ -2,6 +2,7 @@ package com.biyun.order.service.excel.listener;
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.biyun.order.service.excel.pojo.DemoData;
+import com.biyun.order.service.excel.pojo.OriginalOrderData;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
@@ -9,11 +10,11 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
-public class DemoListener extends BaseExcelListener<DemoData> {
-    private final List<DemoData> dataList = new CopyOnWriteArrayList<>();
+public class DemoListener extends BaseExcelListener<OriginalOrderData> {
+    private final List<OriginalOrderData> dataList = new CopyOnWriteArrayList<>();
 
     @Override
-    public void invoke(DemoData demoData, AnalysisContext analysisContext) {
+    public void invoke(OriginalOrderData demoData, AnalysisContext analysisContext) {
         dataList.add(demoData);
     }
 
@@ -23,14 +24,14 @@ public class DemoListener extends BaseExcelListener<DemoData> {
     }
 
     @Override
-    public List<DemoData> getDataList() {
-        List<DemoData> result = Collections.unmodifiableList(dataList);
+    public List<OriginalOrderData> getDataList() {
+        List<OriginalOrderData> result = Collections.unmodifiableList(dataList);
         dataList.clear();
         return result;
     }
 
     @Override
     public Class<?> getClz() {
-        return DemoData.class;
+        return OriginalOrderData.class;
     }
 }

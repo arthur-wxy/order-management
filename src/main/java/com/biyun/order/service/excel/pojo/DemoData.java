@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 public class DemoData extends BaseExcelPojo {
-    @ExcelProperty("字段A")
-    private String columnA;
+    @ExcelProperty("Order ID")
+    private String orderID;
 
     @ExcelProperty("字段B")
     private String columnB;
