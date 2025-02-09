@@ -1,0 +1,36 @@
+[
+    {
+      key: 'summary',
+      icon: null,
+      label: '数据总览',
+      link:'/summary'
+    },
+    {
+      key: 'order_manage',
+      icon: null,
+      label: '订单管理',
+      link:'/order_query',
+      children: [
+              {
+                key: '/order_query',
+                label: '订单查询',
+                link:'/order_query'
+              },
+              {
+                key: '/order_import',
+                label: '订单导入',
+                link:'/order_import'
+              }
+            ]
+    },
+    {
+      key: 'bill_manage',
+      icon: null,
+      label: '账单管理',
+    },
+    {
+      key: 'logistics_manage',
+      label: '物流管理',
+      icon: null,
+    }
+  ]
