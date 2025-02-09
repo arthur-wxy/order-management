@@ -37,7 +37,7 @@ public class ConfigWatcherService implements ApplicationListener<ContextRefreshe
         // 注册感兴趣的事件：ENTRY_CREATE, ENTRY_MODIFY, ENTRY_DELETE
         dirToWatch.register(watchService, StandardWatchEventKinds.ENTRY_CREATE,
                 StandardWatchEventKinds.ENTRY_MODIFY, StandardWatchEventKinds.ENTRY_DELETE);
-        log.info("开始监听");
+        logger.info("Watcher service started");
     }
 
     public void startWatching() throws IOException, InterruptedException {
@@ -63,7 +63,11 @@ public class ConfigWatcherService implements ApplicationListener<ContextRefreshe
                     // 根据事件类型执行相应操作，比如重新加载配置
                     if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
                         System.out.println("监听到文件修改事件，重新加载文件内容");
-                        reloadConfiguration(fileName);
+                        try {
+                            reloadConfiguration(fileName);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 }
 
@@ -75,8 +79,8 @@ public class ConfigWatcherService implements ApplicationListener<ContextRefreshe
         });
     }
 
-    @SneakyThrows
-    private void reloadConfiguration(Path file) {
+
+    private void reloadConfiguration(Path file) throws IOException {
         Path path = dirToWatch.resolve(file);
         if (!Files.exists(path) || !Files.isRegularFile(path)) {
             return;
@@ -92,9 +96,15 @@ public class ConfigWatcherService implements ApplicationListener<ContextRefreshe
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         try {
-            Files.newDirectoryStream(dirToWatch).forEach(path -> reloadConfiguration(path));
+            Files.newDirectoryStream(dirToWatch).forEach(path -> {
+                try {
+                    reloadConfiguration(path);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         } catch (IOException e) {
-            log.error(e.getMessage(), e);
+            logger.error(e.getMessage());
         }
     }
 }
