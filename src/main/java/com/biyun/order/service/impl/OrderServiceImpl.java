@@ -4,7 +4,6 @@ import com.biyun.order.mapper.OrdersMapper;
 import com.biyun.order.model.Orders;
 import com.biyun.order.model.OrdersExample;
 import com.biyun.order.service.OrderService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;

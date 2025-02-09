@@ -1,20 +1,20 @@
 package com.biyun.order.mapper;
 
 import java.util.List;
-import com.biyun.order.model.Orders;
-import com.biyun.order.model.OrdersExample;
+import com.biyun.order.model.OrderItem;
+import com.biyun.order.model.OrderItemExample;
 import org.apache.ibatis.annotations.Param;
 
-public interface OrdersMapper {
+public interface OrderItemMapper {
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    long countByExample(OrdersExample example);
+    long countByExample(OrderItemExample example);
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    int deleteByExample(OrdersExample example);
+    int deleteByExample(OrderItemExample example);
 
     /**
      * @mbg.generated generated automatically, do not modify!
@@ -24,55 +24,55 @@ public interface OrdersMapper {
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    int insert(Orders row);
+    int insert(OrderItem row);
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    int insertSelective(Orders row);
+    int insertSelective(OrderItem row);
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    List<Orders> selectByExampleWithBLOBs(OrdersExample example);
+    List<OrderItem> selectByExampleWithBLOBs(OrderItemExample example);
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    List<Orders> selectByExample(OrdersExample example);
+    List<OrderItem> selectByExample(OrderItemExample example);
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    Orders selectByPrimaryKey(Integer id);
+    OrderItem selectByPrimaryKey(Integer id);
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    int updateByExampleSelective(@Param("row") Orders row, @Param("example") OrdersExample example);
+    int updateByExampleSelective(@Param("row") OrderItem row, @Param("example") OrderItemExample example);
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    int updateByExampleWithBLOBs(@Param("row") Orders row, @Param("example") OrdersExample example);
+    int updateByExampleWithBLOBs(@Param("row") OrderItem row, @Param("example") OrderItemExample example);
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    int updateByExample(@Param("row") Orders row, @Param("example") OrdersExample example);
+    int updateByExample(@Param("row") OrderItem row, @Param("example") OrderItemExample example);
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    int updateByPrimaryKeySelective(Orders row);
+    int updateByPrimaryKeySelective(OrderItem row);
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    int updateByPrimaryKeyWithBLOBs(Orders row);
+    int updateByPrimaryKeyWithBLOBs(OrderItem row);
 
     /**
      * @mbg.generated generated automatically, do not modify!
      */
-    int updateByPrimaryKey(Orders row);
+    int updateByPrimaryKey(OrderItem row);
 }
