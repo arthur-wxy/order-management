@@ -17,6 +17,7 @@
     <result column="customer_payee" jdbcType="VARCHAR" property="customerPayee" />
     <result column="customer_payee_account" jdbcType="VARCHAR" property="customerPayeeAccount" />
     <result column="order_status" jdbcType="VARCHAR" property="orderStatus" />
+    <result column="external_order_id" jdbcType="VARCHAR" property="externalOrderId" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.biyun.order.model.Orders">
     <!-- @mbg.generated: generated automatically, do not modify! -->
@@ -86,7 +87,7 @@
     <!-- @mbg.generated: generated automatically, do not modify! -->
     id, gmt_create, gmt_modified, creator, modifier, is_deleted, actual_customer, customer_phone, 
     customer_email, customer_zip, customer_company, customer_payee, customer_payee_account, 
-    order_status
+    order_status, external_order_id
   </sql>
   <sql id="Blob_Column_List">
     <!-- @mbg.generated: generated automatically, do not modify! -->
@@ -151,12 +152,14 @@
       modifier, is_deleted, actual_customer, 
       customer_phone, customer_email, customer_zip, 
       customer_company, customer_payee, customer_payee_account, 
-      order_status, ext)
+      order_status, external_order_id, ext
+      )
     values (#{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, 
       #{modifier,jdbcType=VARCHAR}, #{isDeleted,jdbcType=CHAR}, #{actualCustomer,jdbcType=VARCHAR}, 
       #{customerPhone,jdbcType=VARCHAR}, #{customerEmail,jdbcType=VARCHAR}, #{customerZip,jdbcType=VARCHAR}, 
       #{customerCompany,jdbcType=VARCHAR}, #{customerPayee,jdbcType=VARCHAR}, #{customerPayeeAccount,jdbcType=VARCHAR}, 
-      #{orderStatus,jdbcType=VARCHAR}, #{ext,jdbcType=LONGVARCHAR})
+      #{orderStatus,jdbcType=VARCHAR}, #{externalOrderId,jdbcType=VARCHAR}, #{ext,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biyun.order.model.Orders" useGeneratedKeys="true">
     <!-- @mbg.generated: generated automatically, do not modify! -->
@@ -201,6 +204,9 @@
       <if test="orderStatus != null">
         order_status,
       </if>
+      <if test="externalOrderId != null">
+        external_order_id,
+      </if>
       <if test="ext != null">
         ext,
       </if>
@@ -244,6 +250,9 @@
       </if>
       <if test="orderStatus != null">
         #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="externalOrderId != null">
+        #{externalOrderId,jdbcType=VARCHAR},
       </if>
       <if test="ext != null">
         #{ext,jdbcType=LONGVARCHAR},
@@ -303,6 +312,9 @@
       <if test="row.orderStatus != null">
         order_status = #{row.orderStatus,jdbcType=VARCHAR},
       </if>
+      <if test="row.externalOrderId != null">
+        external_order_id = #{row.externalOrderId,jdbcType=VARCHAR},
+      </if>
       <if test="row.ext != null">
         ext = #{row.ext,jdbcType=LONGVARCHAR},
       </if>
@@ -328,6 +340,7 @@
       customer_payee = #{row.customerPayee,jdbcType=VARCHAR},
       customer_payee_account = #{row.customerPayeeAccount,jdbcType=VARCHAR},
       order_status = #{row.orderStatus,jdbcType=VARCHAR},
+      external_order_id = #{row.externalOrderId,jdbcType=VARCHAR},
       ext = #{row.ext,jdbcType=LONGVARCHAR}
     <if test="example != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -349,7 +362,8 @@
       customer_company = #{row.customerCompany,jdbcType=VARCHAR},
       customer_payee = #{row.customerPayee,jdbcType=VARCHAR},
       customer_payee_account = #{row.customerPayeeAccount,jdbcType=VARCHAR},
-      order_status = #{row.orderStatus,jdbcType=VARCHAR}
+      order_status = #{row.orderStatus,jdbcType=VARCHAR},
+      external_order_id = #{row.externalOrderId,jdbcType=VARCHAR}
     <if test="example != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -397,6 +411,9 @@
       <if test="orderStatus != null">
         order_status = #{orderStatus,jdbcType=VARCHAR},
       </if>
+      <if test="externalOrderId != null">
+        external_order_id = #{externalOrderId,jdbcType=VARCHAR},
+      </if>
       <if test="ext != null">
         ext = #{ext,jdbcType=LONGVARCHAR},
       </if>
@@ -419,6 +436,7 @@
       customer_payee = #{customerPayee,jdbcType=VARCHAR},
       customer_payee_account = #{customerPayeeAccount,jdbcType=VARCHAR},
       order_status = #{orderStatus,jdbcType=VARCHAR},
+      external_order_id = #{externalOrderId,jdbcType=VARCHAR},
       ext = #{ext,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -437,33 +455,8 @@
       customer_company = #{customerCompany,jdbcType=VARCHAR},
       customer_payee = #{customerPayee,jdbcType=VARCHAR},
       customer_payee_account = #{customerPayeeAccount,jdbcType=VARCHAR},
-      order_status = #{orderStatus,jdbcType=VARCHAR}
+      order_status = #{orderStatus,jdbcType=VARCHAR},
+      external_order_id = #{externalOrderId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByExampleWithLock" parameterType="com.biyun.order.model.OrdersExample" resultMap="BaseResultMap">
-    <!-- @mbg.generated: generated automatically, do not modify! -->
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from orders
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-    for update
-  </select>
-  <select id="selectByPrimaryKeyWithLock" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    <!-- @mbg.generated: generated automatically, do not modify! -->
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from orders
-    where id = #{id,jdbcType=INTEGER}
-    for update
-  </select>
 </mapper>

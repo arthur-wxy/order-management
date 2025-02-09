@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.biyun.order.mapper.OrderItemMapper">
+  <resultMap id="BaseResultMap" type="com.biyun.order.model.OrderItem">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="is_deleted" jdbcType="CHAR" property="isDeleted" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="sku" jdbcType="VARCHAR" property="sku" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="sku_tic" jdbcType="VARCHAR" property="skuTic" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="shipping _full_name" jdbcType="VARCHAR" property="shippingFullName" />
+    <result column="address1" jdbcType="VARCHAR" property="address1" />
+    <result column="address2" jdbcType="VARCHAR" property="address2" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="zip" jdbcType="VARCHAR" property="zip" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="shipping_method" jdbcType="VARCHAR" property="shippingMethod" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="size" jdbcType="VARCHAR" property="size" />
+    <result column="customily_uniq_id" jdbcType="VARCHAR" property="customilyUniqId" />
+    <result column="uniq_field" jdbcType="VARCHAR" property="uniqField" />
+    <result column="item_id" jdbcType="VARCHAR" property="itemId" />
+    <result column="is_shopify" jdbcType="BIT" property="isShopify" />
+    <result column="shopify_product_type" jdbcType="VARCHAR" property="shopifyProductType" />
+    <result column="number_of_names" jdbcType="INTEGER" property="numberOfNames" />
+    <result column="order_item_status" jdbcType="VARCHAR" property="orderItemStatus" />
+    <result column="external_order_id" jdbcType="VARCHAR" property="externalOrderId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.biyun.order.model.OrderItem">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    <result column="attribute" jdbcType="LONGVARCHAR" property="attribute" />
+    <result column="order_preview_url" jdbcType="LONGVARCHAR" property="orderPreviewUrl" />
+    <result column="design_url" jdbcType="LONGVARCHAR" property="designUrl" />
+    <result column="customization_url" jdbcType="LONGVARCHAR" property="customizationUrl" />
+    <result column="fulfillment_fields" jdbcType="LONGVARCHAR" property="fulfillmentFields" />
+    <result column="ext" jdbcType="LONGVARCHAR" property="ext" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    id, gmt_create, gmt_modified, creator, modifier, is_deleted, order_id, sku, product_name, 
+    sku_tic, quantity, price, `shipping _full_name`, address1, address2, city, `state`, 
+    country, zip, phone, email, shipping_method, color, `size`, customily_uniq_id, uniq_field, 
+    item_id, is_shopify, shopify_product_type, number_of_names, order_item_status, external_order_id
+  </sql>
+  <sql id="Blob_Column_List">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    `attribute`, order_preview_url, design_url, customization_url, fulfillment_fields, 
+    ext
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.biyun.order.model.OrderItemExample" resultMap="ResultMapWithBLOBs">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.biyun.order.model.OrderItemExample" resultMap="BaseResultMap">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from order_item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    delete from order_item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.biyun.order.model.OrderItemExample">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    delete from order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.biyun.order.model.OrderItem" useGeneratedKeys="true">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    insert into order_item (gmt_create, gmt_modified, creator, 
+      modifier, is_deleted, order_id, 
+      sku, product_name, sku_tic, 
+      quantity, price, `shipping _full_name`, 
+      address1, address2, city, 
+      `state`, country, zip, 
+      phone, email, shipping_method, 
+      color, `size`, customily_uniq_id, 
+      uniq_field, item_id, is_shopify, 
+      shopify_product_type, number_of_names, order_item_status, 
+      external_order_id, `attribute`, order_preview_url, 
+      design_url, customization_url, fulfillment_fields, 
+      ext)
+    values (#{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, 
+      #{modifier,jdbcType=VARCHAR}, #{isDeleted,jdbcType=CHAR}, #{orderId,jdbcType=INTEGER}, 
+      #{sku,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{skuTic,jdbcType=VARCHAR}, 
+      #{quantity,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{shippingFullName,jdbcType=VARCHAR}, 
+      #{address1,jdbcType=VARCHAR}, #{address2,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{zip,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{shippingMethod,jdbcType=VARCHAR}, 
+      #{color,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, #{customilyUniqId,jdbcType=VARCHAR}, 
+      #{uniqField,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR}, #{isShopify,jdbcType=BIT}, 
+      #{shopifyProductType,jdbcType=VARCHAR}, #{numberOfNames,jdbcType=INTEGER}, #{orderItemStatus,jdbcType=VARCHAR}, 
+      #{externalOrderId,jdbcType=VARCHAR}, #{attribute,jdbcType=LONGVARCHAR}, #{orderPreviewUrl,jdbcType=LONGVARCHAR}, 
+      #{designUrl,jdbcType=LONGVARCHAR}, #{customizationUrl,jdbcType=LONGVARCHAR}, #{fulfillmentFields,jdbcType=LONGVARCHAR}, 
+      #{ext,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.biyun.order.model.OrderItem" useGeneratedKeys="true">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    insert into order_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="sku != null">
+        sku,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="skuTic != null">
+        sku_tic,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="shippingFullName != null">
+        `shipping _full_name`,
+      </if>
+      <if test="address1 != null">
+        address1,
+      </if>
+      <if test="address2 != null">
+        address2,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="zip != null">
+        zip,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="shippingMethod != null">
+        shipping_method,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="size != null">
+        `size`,
+      </if>
+      <if test="customilyUniqId != null">
+        customily_uniq_id,
+      </if>
+      <if test="uniqField != null">
+        uniq_field,
+      </if>
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="isShopify != null">
+        is_shopify,
+      </if>
+      <if test="shopifyProductType != null">
+        shopify_product_type,
+      </if>
+      <if test="numberOfNames != null">
+        number_of_names,
+      </if>
+      <if test="orderItemStatus != null">
+        order_item_status,
+      </if>
+      <if test="externalOrderId != null">
+        external_order_id,
+      </if>
+      <if test="attribute != null">
+        `attribute`,
+      </if>
+      <if test="orderPreviewUrl != null">
+        order_preview_url,
+      </if>
+      <if test="designUrl != null">
+        design_url,
+      </if>
+      <if test="customizationUrl != null">
+        customization_url,
+      </if>
+      <if test="fulfillmentFields != null">
+        fulfillment_fields,
+      </if>
+      <if test="ext != null">
+        ext,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="sku != null">
+        #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuTic != null">
+        #{skuTic,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingFullName != null">
+        #{shippingFullName,jdbcType=VARCHAR},
+      </if>
+      <if test="address1 != null">
+        #{address1,jdbcType=VARCHAR},
+      </if>
+      <if test="address2 != null">
+        #{address2,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null">
+        #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingMethod != null">
+        #{shippingMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="customilyUniqId != null">
+        #{customilyUniqId,jdbcType=VARCHAR},
+      </if>
+      <if test="uniqField != null">
+        #{uniqField,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="isShopify != null">
+        #{isShopify,jdbcType=BIT},
+      </if>
+      <if test="shopifyProductType != null">
+        #{shopifyProductType,jdbcType=VARCHAR},
+      </if>
+      <if test="numberOfNames != null">
+        #{numberOfNames,jdbcType=INTEGER},
+      </if>
+      <if test="orderItemStatus != null">
+        #{orderItemStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="externalOrderId != null">
+        #{externalOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="attribute != null">
+        #{attribute,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="orderPreviewUrl != null">
+        #{orderPreviewUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="designUrl != null">
+        #{designUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="customizationUrl != null">
+        #{customizationUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fulfillmentFields != null">
+        #{fulfillmentFields,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ext != null">
+        #{ext,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.biyun.order.model.OrderItemExample" resultType="java.lang.Long">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    select count(*) from order_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    update order_item
+    <set>
+      <if test="row.id != null">
+        id = #{row.id,jdbcType=INTEGER},
+      </if>
+      <if test="row.gmtCreate != null">
+        gmt_create = #{row.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.gmtModified != null">
+        gmt_modified = #{row.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="row.creator != null">
+        creator = #{row.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="row.modifier != null">
+        modifier = #{row.modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="row.isDeleted != null">
+        is_deleted = #{row.isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="row.orderId != null">
+        order_id = #{row.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="row.sku != null">
+        sku = #{row.sku,jdbcType=VARCHAR},
+      </if>
+      <if test="row.productName != null">
+        product_name = #{row.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="row.skuTic != null">
+        sku_tic = #{row.skuTic,jdbcType=VARCHAR},
+      </if>
+      <if test="row.quantity != null">
+        quantity = #{row.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="row.price != null">
+        price = #{row.price,jdbcType=DECIMAL},
+      </if>
+      <if test="row.shippingFullName != null">
+        `shipping _full_name` = #{row.shippingFullName,jdbcType=VARCHAR},
+      </if>
+      <if test="row.address1 != null">
+        address1 = #{row.address1,jdbcType=VARCHAR},
+      </if>
+      <if test="row.address2 != null">
+        address2 = #{row.address2,jdbcType=VARCHAR},
+      </if>
+      <if test="row.city != null">
+        city = #{row.city,jdbcType=VARCHAR},
+      </if>
+      <if test="row.state != null">
+        `state` = #{row.state,jdbcType=VARCHAR},
+      </if>
+      <if test="row.country != null">
+        country = #{row.country,jdbcType=VARCHAR},
+      </if>
+      <if test="row.zip != null">
+        zip = #{row.zip,jdbcType=VARCHAR},
+      </if>
+      <if test="row.phone != null">
+        phone = #{row.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="row.email != null">
+        email = #{row.email,jdbcType=VARCHAR},
+      </if>
+      <if test="row.shippingMethod != null">
+        shipping_method = #{row.shippingMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="row.color != null">
+        color = #{row.color,jdbcType=VARCHAR},
+      </if>
+      <if test="row.size != null">
+        `size` = #{row.size,jdbcType=VARCHAR},
+      </if>
+      <if test="row.customilyUniqId != null">
+        customily_uniq_id = #{row.customilyUniqId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.uniqField != null">
+        uniq_field = #{row.uniqField,jdbcType=VARCHAR},
+      </if>
+      <if test="row.itemId != null">
+        item_id = #{row.itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.isShopify != null">
+        is_shopify = #{row.isShopify,jdbcType=BIT},
+      </if>
+      <if test="row.shopifyProductType != null">
+        shopify_product_type = #{row.shopifyProductType,jdbcType=VARCHAR},
+      </if>
+      <if test="row.numberOfNames != null">
+        number_of_names = #{row.numberOfNames,jdbcType=INTEGER},
+      </if>
+      <if test="row.orderItemStatus != null">
+        order_item_status = #{row.orderItemStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="row.externalOrderId != null">
+        external_order_id = #{row.externalOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="row.attribute != null">
+        `attribute` = #{row.attribute,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.orderPreviewUrl != null">
+        order_preview_url = #{row.orderPreviewUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.designUrl != null">
+        design_url = #{row.designUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.customizationUrl != null">
+        customization_url = #{row.customizationUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.fulfillmentFields != null">
+        fulfillment_fields = #{row.fulfillmentFields,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="row.ext != null">
+        ext = #{row.ext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    update order_item
+    set id = #{row.id,jdbcType=INTEGER},
+      gmt_create = #{row.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{row.gmtModified,jdbcType=TIMESTAMP},
+      creator = #{row.creator,jdbcType=VARCHAR},
+      modifier = #{row.modifier,jdbcType=VARCHAR},
+      is_deleted = #{row.isDeleted,jdbcType=CHAR},
+      order_id = #{row.orderId,jdbcType=INTEGER},
+      sku = #{row.sku,jdbcType=VARCHAR},
+      product_name = #{row.productName,jdbcType=VARCHAR},
+      sku_tic = #{row.skuTic,jdbcType=VARCHAR},
+      quantity = #{row.quantity,jdbcType=INTEGER},
+      price = #{row.price,jdbcType=DECIMAL},
+      `shipping _full_name` = #{row.shippingFullName,jdbcType=VARCHAR},
+      address1 = #{row.address1,jdbcType=VARCHAR},
+      address2 = #{row.address2,jdbcType=VARCHAR},
+      city = #{row.city,jdbcType=VARCHAR},
+      `state` = #{row.state,jdbcType=VARCHAR},
+      country = #{row.country,jdbcType=VARCHAR},
+      zip = #{row.zip,jdbcType=VARCHAR},
+      phone = #{row.phone,jdbcType=VARCHAR},
+      email = #{row.email,jdbcType=VARCHAR},
+      shipping_method = #{row.shippingMethod,jdbcType=VARCHAR},
+      color = #{row.color,jdbcType=VARCHAR},
+      `size` = #{row.size,jdbcType=VARCHAR},
+      customily_uniq_id = #{row.customilyUniqId,jdbcType=VARCHAR},
+      uniq_field = #{row.uniqField,jdbcType=VARCHAR},
+      item_id = #{row.itemId,jdbcType=VARCHAR},
+      is_shopify = #{row.isShopify,jdbcType=BIT},
+      shopify_product_type = #{row.shopifyProductType,jdbcType=VARCHAR},
+      number_of_names = #{row.numberOfNames,jdbcType=INTEGER},
+      order_item_status = #{row.orderItemStatus,jdbcType=VARCHAR},
+      external_order_id = #{row.externalOrderId,jdbcType=VARCHAR},
+      `attribute` = #{row.attribute,jdbcType=LONGVARCHAR},
+      order_preview_url = #{row.orderPreviewUrl,jdbcType=LONGVARCHAR},
+      design_url = #{row.designUrl,jdbcType=LONGVARCHAR},
+      customization_url = #{row.customizationUrl,jdbcType=LONGVARCHAR},
+      fulfillment_fields = #{row.fulfillmentFields,jdbcType=LONGVARCHAR},
+      ext = #{row.ext,jdbcType=LONGVARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    update order_item
+    set id = #{row.id,jdbcType=INTEGER},
+      gmt_create = #{row.gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{row.gmtModified,jdbcType=TIMESTAMP},
+      creator = #{row.creator,jdbcType=VARCHAR},
+      modifier = #{row.modifier,jdbcType=VARCHAR},
+      is_deleted = #{row.isDeleted,jdbcType=CHAR},
+      order_id = #{row.orderId,jdbcType=INTEGER},
+      sku = #{row.sku,jdbcType=VARCHAR},
+      product_name = #{row.productName,jdbcType=VARCHAR},
+      sku_tic = #{row.skuTic,jdbcType=VARCHAR},
+      quantity = #{row.quantity,jdbcType=INTEGER},
+      price = #{row.price,jdbcType=DECIMAL},
+      `shipping _full_name` = #{row.shippingFullName,jdbcType=VARCHAR},
+      address1 = #{row.address1,jdbcType=VARCHAR},
+      address2 = #{row.address2,jdbcType=VARCHAR},
+      city = #{row.city,jdbcType=VARCHAR},
+      `state` = #{row.state,jdbcType=VARCHAR},
+      country = #{row.country,jdbcType=VARCHAR},
+      zip = #{row.zip,jdbcType=VARCHAR},
+      phone = #{row.phone,jdbcType=VARCHAR},
+      email = #{row.email,jdbcType=VARCHAR},
+      shipping_method = #{row.shippingMethod,jdbcType=VARCHAR},
+      color = #{row.color,jdbcType=VARCHAR},
+      `size` = #{row.size,jdbcType=VARCHAR},
+      customily_uniq_id = #{row.customilyUniqId,jdbcType=VARCHAR},
+      uniq_field = #{row.uniqField,jdbcType=VARCHAR},
+      item_id = #{row.itemId,jdbcType=VARCHAR},
+      is_shopify = #{row.isShopify,jdbcType=BIT},
+      shopify_product_type = #{row.shopifyProductType,jdbcType=VARCHAR},
+      number_of_names = #{row.numberOfNames,jdbcType=INTEGER},
+      order_item_status = #{row.orderItemStatus,jdbcType=VARCHAR},
+      external_order_id = #{row.externalOrderId,jdbcType=VARCHAR}
+    <if test="example != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.biyun.order.model.OrderItem">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    update order_item
+    <set>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=CHAR},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="sku != null">
+        sku = #{sku,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuTic != null">
+        sku_tic = #{skuTic,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="shippingFullName != null">
+        `shipping _full_name` = #{shippingFullName,jdbcType=VARCHAR},
+      </if>
+      <if test="address1 != null">
+        address1 = #{address1,jdbcType=VARCHAR},
+      </if>
+      <if test="address2 != null">
+        address2 = #{address2,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="zip != null">
+        zip = #{zip,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingMethod != null">
+        shipping_method = #{shippingMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        `size` = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="customilyUniqId != null">
+        customily_uniq_id = #{customilyUniqId,jdbcType=VARCHAR},
+      </if>
+      <if test="uniqField != null">
+        uniq_field = #{uniqField,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        item_id = #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="isShopify != null">
+        is_shopify = #{isShopify,jdbcType=BIT},
+      </if>
+      <if test="shopifyProductType != null">
+        shopify_product_type = #{shopifyProductType,jdbcType=VARCHAR},
+      </if>
+      <if test="numberOfNames != null">
+        number_of_names = #{numberOfNames,jdbcType=INTEGER},
+      </if>
+      <if test="orderItemStatus != null">
+        order_item_status = #{orderItemStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="externalOrderId != null">
+        external_order_id = #{externalOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="attribute != null">
+        `attribute` = #{attribute,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="orderPreviewUrl != null">
+        order_preview_url = #{orderPreviewUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="designUrl != null">
+        design_url = #{designUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="customizationUrl != null">
+        customization_url = #{customizationUrl,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fulfillmentFields != null">
+        fulfillment_fields = #{fulfillmentFields,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ext != null">
+        ext = #{ext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.biyun.order.model.OrderItem">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    update order_item
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=CHAR},
+      order_id = #{orderId,jdbcType=INTEGER},
+      sku = #{sku,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      sku_tic = #{skuTic,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      `shipping _full_name` = #{shippingFullName,jdbcType=VARCHAR},
+      address1 = #{address1,jdbcType=VARCHAR},
+      address2 = #{address2,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      `state` = #{state,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      zip = #{zip,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      shipping_method = #{shippingMethod,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      `size` = #{size,jdbcType=VARCHAR},
+      customily_uniq_id = #{customilyUniqId,jdbcType=VARCHAR},
+      uniq_field = #{uniqField,jdbcType=VARCHAR},
+      item_id = #{itemId,jdbcType=VARCHAR},
+      is_shopify = #{isShopify,jdbcType=BIT},
+      shopify_product_type = #{shopifyProductType,jdbcType=VARCHAR},
+      number_of_names = #{numberOfNames,jdbcType=INTEGER},
+      order_item_status = #{orderItemStatus,jdbcType=VARCHAR},
+      external_order_id = #{externalOrderId,jdbcType=VARCHAR},
+      `attribute` = #{attribute,jdbcType=LONGVARCHAR},
+      order_preview_url = #{orderPreviewUrl,jdbcType=LONGVARCHAR},
+      design_url = #{designUrl,jdbcType=LONGVARCHAR},
+      customization_url = #{customizationUrl,jdbcType=LONGVARCHAR},
+      fulfillment_fields = #{fulfillmentFields,jdbcType=LONGVARCHAR},
+      ext = #{ext,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.biyun.order.model.OrderItem">
+    <!-- @mbg.generated: generated automatically, do not modify! -->
+    update order_item
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=CHAR},
+      order_id = #{orderId,jdbcType=INTEGER},
+      sku = #{sku,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      sku_tic = #{skuTic,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      `shipping _full_name` = #{shippingFullName,jdbcType=VARCHAR},
+      address1 = #{address1,jdbcType=VARCHAR},
+      address2 = #{address2,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      `state` = #{state,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      zip = #{zip,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      shipping_method = #{shippingMethod,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      `size` = #{size,jdbcType=VARCHAR},
+      customily_uniq_id = #{customilyUniqId,jdbcType=VARCHAR},
+      uniq_field = #{uniqField,jdbcType=VARCHAR},
+      item_id = #{itemId,jdbcType=VARCHAR},
+      is_shopify = #{isShopify,jdbcType=BIT},
+      shopify_product_type = #{shopifyProductType,jdbcType=VARCHAR},
+      number_of_names = #{numberOfNames,jdbcType=INTEGER},
+      order_item_status = #{orderItemStatus,jdbcType=VARCHAR},
+      external_order_id = #{externalOrderId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
